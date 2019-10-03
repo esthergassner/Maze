@@ -33,12 +33,15 @@ class MazeFrame extends JFrame
                 Cell currentCell = cells[ix][iy];
 
                 JPanel panel = new JPanel();
+                panel.setBackground(new Color(134, 255, 238));
                 if (ix == 0 && iy == 0)
                 {
+                    panel.setBackground(new Color(27, 133, 123));
                     panel.add(new JLabel("<html><br/>ENTER--></html>"));
                 }
                 else if ((ix == (dimension - 1)) && (iy == (dimension - 1)))
                 {
+                    panel.setBackground(new Color(27, 133, 123));
                     panel.add(new JLabel("<html><br/>EXIT--></html>"));
                 }
                 Border currBorders = BorderFactory.createMatteBorder(currentCell.getTopWall(),
