@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
 
 class MazeFrame extends JFrame
 {
@@ -19,6 +20,9 @@ class MazeFrame extends JFrame
         setUpContents(root, maze);
         root.setLayout(new GridLayout(maze.getMAZE_DIMENSION(), maze.getMAZE_DIMENSION()));
         setContentPane(root);
+
+        Solution solution = new Solution(maze);
+        solution.solveDepthFirst(0,0, new ArrayList<Cell>());
     }
 
     private void setUpContents(JPanel root, Maze maze)

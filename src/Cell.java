@@ -16,9 +16,9 @@ class Cell
         return topWall;
     }
 
-    void setTopWall(int topWall)
+    void removeTopWall()
     {
-        this.topWall = topWall;
+        this.topWall = 0;
     }
 
     int getBottWall()
@@ -26,9 +26,9 @@ class Cell
         return bottWall;
     }
 
-    void setBottWall(int bottWall)
+    void removeBottWall()
     {
-        this.bottWall = bottWall;
+        this.bottWall = 0;
     }
 
     int getRiteWall()
@@ -36,9 +36,9 @@ class Cell
         return riteWall;
     }
 
-    void setRiteWall(int riteWall)
+    void removeRiteWall()
     {
-        this.riteWall = riteWall;
+        this.riteWall = 0;
     }
 
     int getLeftWall()
@@ -46,9 +46,9 @@ class Cell
         return leftWall;
     }
 
-    void setLeftWall(int leftWall)
+    void removeLeftWall()
     {
-        this.leftWall = leftWall;
+        this.leftWall = 0;
     }
 
     Cell(int row, int col)
