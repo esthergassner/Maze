@@ -3,6 +3,18 @@ import java.util.ArrayList;
 class Cell
 {
     private boolean visited;
+    private boolean solution;
+
+    public boolean isSolution()
+    {
+        return solution;
+    }
+
+    public void setSolution(boolean solution)
+    {
+        this.solution = solution;
+    }
+
     private int row;
     private int col;
     private ArrayList<Cell> unvisitedNeighbors;

@@ -52,7 +52,7 @@ class MazeFrame extends JFrame
                         currentCell.getLeftWall(),
                         currentCell.getBottWall(),
                         currentCell.getRiteWall(),
-                        Color.BLACK);
+                        currentCell.isSolution() ? Color.GREEN : Color.BLACK);
                 panel.setBorder(currBorders);
                 panel.setSize(7, 7);
                 root.add(panel);
