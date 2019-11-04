@@ -51,23 +51,23 @@ public class Maze
         int colDif = current.getCol() - next.getCol();
         if (colDif == 1) //next is to current's left
         {
-            cells[current.getRow()][current.getCol()].setLeftWall(0);
-            cells[next.getRow()][next.getCol()].setRiteWall(0);
+            cells[current.getRow()][current.getCol()].removeLeftWall();
+            cells[next.getRow()][next.getCol()].removeRiteWall();
         }
         else if (colDif == -1) //next is to current's right
         {
-            cells[current.getRow()][current.getCol()].setRiteWall(0);
-            cells[next.getRow()][next.getCol()].setLeftWall(0);
+            cells[current.getRow()][current.getCol()].removeRiteWall();
+            cells[next.getRow()][next.getCol()].removeLeftWall();
         }
         else if (rowDif == 1) //next is above current
         {
-            cells[current.getRow()][current.getCol()].setTopWall(0);
-            cells[next.getRow()][next.getCol()].setBottWall(0);
+            cells[current.getRow()][current.getCol()].removeTopWall();
+            cells[next.getRow()][next.getCol()].removeBottWall();
         }
         else if (rowDif == -1) //next is below current
         {
-            cells[current.getRow()][current.getCol()].setBottWall(0);
-            cells[next.getRow()][next.getCol()].setTopWall(0);
+            cells[current.getRow()][current.getCol()].removeBottWall();
+            cells[next.getRow()][next.getCol()].removeTopWall();
         }
     }
 
@@ -111,8 +111,8 @@ public class Maze
 
     void setEntranceAndExit()
     {
-        cells[0][0].setLeftWall(0);
-        cells[MAZE_DIMENSION - 1][MAZE_DIMENSION - 1].setRiteWall(0);
+        cells[0][0].removeLeftWall();
+        cells[MAZE_DIMENSION - 1][MAZE_DIMENSION - 1].removeRiteWall();
     }
 
     int getMAZE_DIMENSION()

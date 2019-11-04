@@ -1,28 +1,54 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
 
 class MazeFrame extends JFrame
 {
+    private Maze maze = new Maze();
+    private JPanel root = new JPanel();
+
     MazeFrame()
     {
         setTitle("Maze");
         setSize(1500, 1500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        Maze maze = new Maze();
         maze.setUpCells();
         maze.setEntranceAndExit();
         maze.generateMaze();
 
-        JPanel root = new JPanel();
-        setUpContents(root, maze);
-        root.setLayout(new GridLayout(maze.getMAZE_DIMENSION(), maze.getMAZE_DIMENSION()));
+        JPanel mazePanel = setUpMazePanel(maze);
+
+        root.setLayout(new BorderLayout());
+        root.add(mazePanel, BorderLayout.CENTER);
+
+        JButton solverButton = setUpSolverButton(mazePanel);
+
+        root.add(solverButton, BorderLayout.SOUTH);
         setContentPane(root);
     }
 
-    private void setUpContents(JPanel root, Maze maze)
+    private JButton setUpSolverButton(JPanel mazePanel)
     {
+        JButton solverButton = new JButton("Show Solution");
+        solverButton.setBackground(Color.YELLOW);
+        solverButton.addActionListener(e ->
+        {
+            root.remove(mazePanel);
+            Solution solution = new Solution(maze);
+            solution.solveDepthFirst(0,0, new ArrayList<Cell>());
+            JPanel solutionPanel = setUpMazePanel(maze);
+            root.add(solutionPanel, BorderLayout.CENTER);
+            setContentPane(root);
+        });
+        return solverButton;
+    }
+
+    private JPanel setUpMazePanel(Maze maze)
+    {
+        JPanel returnPanel = new JPanel();
+        returnPanel.setLayout(new GridLayout(maze.getMAZE_DIMENSION(), maze.getMAZE_DIMENSION()));
         int dimension = maze.getMAZE_DIMENSION();
         Cell[][] cells = maze.getCells();
 
@@ -33,15 +59,13 @@ class MazeFrame extends JFrame
                 Cell currentCell = cells[ix][iy];
 
                 JPanel panel = new JPanel();
-                panel.setBackground(new Color(134, 255, 238));
+                panel.setBackground(currentCell.isSolution() ? new Color(198, 255, 240) : new Color(134, 255, 238));
                 if (ix == 0 && iy == 0)
                 {
-                    panel.setBackground(new Color(27, 133, 123));
                     panel.add(new JLabel("<html><br/>ENTER--></html>"));
                 }
                 else if ((ix == (dimension - 1)) && (iy == (dimension - 1)))
                 {
-                    panel.setBackground(new Color(27, 133, 123));
                     panel.add(new JLabel("<html><br/>EXIT--></html>"));
                 }
                 Border currBorders = BorderFactory.createMatteBorder(currentCell.getTopWall(),
@@ -51,8 +75,9 @@ class MazeFrame extends JFrame
                         Color.BLACK);
                 panel.setBorder(currBorders);
                 panel.setSize(7, 7);
-                root.add(panel);
+                returnPanel.add(panel);
             }
         }
+        return returnPanel;
     }
 }
