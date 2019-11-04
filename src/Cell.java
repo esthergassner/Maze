@@ -5,14 +5,14 @@ class Cell
     private boolean visited;
     private boolean solution;
 
-    public boolean isSolution()
+    boolean isSolution()
     {
         return solution;
     }
 
-    public void setSolution(boolean solution)
+    void setSolution()
     {
-        this.solution = solution;
+        this.solution = true;
     }
 
     private int row;
